@@ -28,7 +28,9 @@ jobs:
         zip -r public/hidden_totem_food_offhand.zip assets pack.mcmeta
   deploy:
     needs: [build]
+    runs-on: ubuntu-latest
     steps:
+    - name: Backblaze B2 Sync
     - uses: jakejarvis/backblaze-b2-action@v0.1.0
       env:
         SOURCE_DIR: './public'
