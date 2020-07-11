@@ -26,7 +26,7 @@ jobs:
     needs: [checkout]
     steps:
     # Runs a set of commands using the runners shell
-      run: |
+    - run: |
         cd $GITHUB_WORKSPACE
         mkdir public
         sudo python3 -mpip install b2
