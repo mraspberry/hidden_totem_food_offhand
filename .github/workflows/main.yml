@@ -22,19 +22,11 @@ jobs:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
     - uses: actions/checkout@master
     # Runs a set of commands using the runners shell
-    - name: Create Zip
       run: |
+        cd $GITHUB_WORKSPACE
         mkdir public
+        sudo python3 -mpip install b2
         zip -r public/hidden_totem_food_offhand.zip assets pack.mcmeta
-  deploy:
-    needs: [build]
-    runs-on: ubuntu-latest
-    steps:
-    - name: Backblaze B2 Sync
-    - uses: jakejarvis/backblaze-b2-action@v0.1.0
-      env:
-        SOURCE_DIR: './public'
-        B2_BUCKET: ${{ secrets.B2_BUCKET }}
-        B2_APPKEY_ID: ${{ secrets.B2_APPKEY_ID }}
-        B2_APPKEY: ${{ secrets.B2_APPKEY }}
-
+        b2 authorize-account ${{ secrets.B2_APPKEY_ID }} ${{ secrets.B2_APPKEY }}
+        b2 upload-file --noProgress ${{ secrets.B2_BUCKET }} public/hidden_totem_food_offhand.zip hidden_totem_food_offhand.zip
+        b2 clear-account 
