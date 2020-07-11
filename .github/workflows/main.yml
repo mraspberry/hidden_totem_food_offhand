@@ -28,7 +28,8 @@ jobs:
     # Runs a set of commands using the runners shell
     - run: |
         cd $GITHUB_WORKSPACE
-        sudo -H python3 -mpip install setuptools b2
+        sudo -H python3 -mpip install setuptools
+        sudo -H python3 -mpip install b2
         zip -r hidden_totem_food_offhand.zip assets pack.mcmeta
         b2 authorize-account ${{ secrets.B2_APPKEY_ID }} ${{ secrets.B2_APPKEY }}
         b2 upload-file --noProgress ${{ secrets.B2_BUCKET }} hidden_totem_food_offhand.zip hidden_totem_food_offhand.zip
