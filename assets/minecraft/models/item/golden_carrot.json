@@ -6,9 +6,6 @@
   "display": {
     "thirdperson_lefthand": {
         "scale": [ 0, 0, 0 ]
-      },
-      "firstperson_lefthand": {
-        "scale": [ 0, 0, 0 ]
       }
     }
 }
