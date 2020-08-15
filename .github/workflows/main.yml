@@ -20,17 +20,7 @@ jobs:
     # Steps represent a sequence of tasks that will be executed as part of the job
     steps:
     # Checks-out your repository under $GITHUB_WORKSPACE, so your job can access it
-    - uses: actions/checkout@master
-  deploy:    
-    runs-on: ubuntu-latest
-    needs: [checkout]
-    steps:
-    # Runs a set of commands using the runners shell
-    - run: |
-        cd $GITHUB_WORKSPACE
-        sudo -H python3 -mpip install setuptools wheel
-        sudo -H python3 -mpip install b2
-        zip -r hidden_totem_food_offhand.zip assets pack.mcmeta
-        b2 authorize-account ${{ secrets.B2_APPKEY_ID }} ${{ secrets.B2_APPKEY }}
-        b2 upload-file --noProgress ${{ secrets.B2_BUCKET }} hidden_totem_food_offhand.zip hidden_totem_food_offhand.zip
-        b2 clear-account 
+    - uses: actions/checkout@v1
+    - name: deploy
+      run: |
+        ./deploy.sh "${{ secrets.B2_APPKEY_ID }}" "${{ secrets.B2_APPKEY }}" "${{ secrets.B2_BUCKET }}"
