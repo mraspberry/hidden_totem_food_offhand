@@ -4,7 +4,7 @@
     "layer0": "minecraft:item/cooked_porkchop"
   },
   "display": {
-    "thirdperson_lefthand": {
+    "firstperson_lefthand": {
         "scale": [ 0, 0, 0 ]
       }
     }
